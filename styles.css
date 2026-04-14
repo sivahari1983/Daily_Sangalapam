@@ -1,0 +1,324 @@
+:root {
+  color-scheme: light;
+  --background: #fdf9f7;
+  --surface: #ffffff;
+  --primary: #d4512d;
+  --primary-strong: #a83620;
+  --accent: #f59e3a;
+  --text: #2d2416;
+  --text-secondary: #5a5148;
+  --border: #e8ddd5;
+  --light-bg: #faf5f2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Noto Sans Tamil", system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #faf5f2 0%, #f5e6dd 100%);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.navbar {
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  padding: 16px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.app-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero {
+  padding: 48px 0 32px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.9rem;
+}
+
+h2 {
+  margin: 0 0 16px;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.intro {
+  margin: 16px 0 0;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.daily-section {
+  padding: 32px 0;
+}
+
+.daily-card {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.daily-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
+  color: white;
+  padding: 24px;
+  text-align: center;
+}
+
+.card-date {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.card-day {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.card-body {
+  padding: 28px;
+}
+
+.card-body h3 {
+  margin: 0 0 16px;
+  color: var(--primary);
+  font-size: 1.3rem;
+}
+
+.sankalpam {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--text);
+  font-style: italic;
+}
+
+.sankalpam-meaning {
+  margin: 0;
+  padding: 16px;
+  background: var(--light-bg);
+  border-left: 4px solid var(--primary);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.card-actions {
+  padding: 0 28px 28px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  background: var(--primary);
+  border: none;
+  border-radius: 999px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: "Noto Sans Tamil", system-ui, sans-serif;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--primary-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(212, 81, 45, 0.3);
+}
+
+.content-section {
+  padding: 48px 0;
+  background: var(--light-bg);
+  margin: 32px -20px 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.content-section h2,
+.weekly-section h2,
+.guide-section h2 {
+  margin-bottom: 32px;
+  text-align: center;
+  color: var(--primary);
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin: 0 auto;
+}
+
+.info-card {
+  background: var(--surface);
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+}
+
+.info-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  color: var(--primary);
+}
+
+.info-card p {
+  margin: 0;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.weekly-section {
+  padding: 48px 0;
+}
+
+.weekly-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.weekly-card {
+  background: var(--surface);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.weekly-card:hover {
+  background: var(--accent);
+  border-color: var(--primary);
+  box-shadow: 0 8px 24px rgba(212, 81, 45, 0.15);
+}
+
+.weekly-card h4 {
+  margin: 0 0 12px;
+  color: var(--primary);
+  font-size: 1.05rem;
+}
+
+.weekly-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.guide-section {
+  padding: 48px 0;
+}
+
+.guide-list {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 24px;
+  line-height: 2;
+}
+
+.guide-list li {
+  margin-bottom: 20px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.guide-list strong {
+  color: var(--primary);
+}
+
+.footer {
+  background: var(--text);
+  color: white;
+  text-align: center;
+  padding: 32px 20px;
+  margin-top: 48px;
+}
+
+.footer p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .nav-title {
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .weekly-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .sankalpam {
+    font-size: 1.1rem;
+  }
+}
