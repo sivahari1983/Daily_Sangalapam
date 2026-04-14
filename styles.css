@@ -129,6 +129,10 @@ h2 {
   padding: 28px;
 }
 
+.card-body {
+  padding: 32px;
+}
+
 .card-body h3 {
   margin: 0 0 16px;
   color: var(--primary);
@@ -137,10 +141,16 @@ h2 {
 
 .sankalpam {
   margin: 0 0 16px;
-  font-size: 1.25rem;
-  line-height: 1.8;
+  font-size: 1.1rem;
+  line-height: 2;
   color: var(--text);
   font-style: italic;
+  letter-spacing: 0.03em;
+  word-spacing: 0.2em;
+  text-align: justify;
+  padding: 16px;
+  background: rgba(212, 81, 45, 0.05);
+  border-radius: 8px;
 }
 
 .sankalpam-meaning {
