@@ -1,134 +1,225 @@
-// Daily Sangalpam - Complete Traditional Format
+// Tamil Calendar Calculator - April 14, 2026
 
 window.addEventListener('DOMContentLoaded', function() {
-  const dateLabel = document.getElementById('dateLabel');
-  const dayLabel = document.getElementById('dayLabel');
-  const sankalpamText = document.getElementById('sankalpamText');
-  const meaningText = document.getElementById('meaningText');
-  const button = document.getElementById('newSankalpamButton');
-
-  // Comprehensive Tamil Calendar Data
-  const tamilMonths = ["சித்திரை", "வைகாசி", "ஆனி", "ஆடி", "ஐப்பசி", "கார்த்திகை", "மார்கழி", "தை", "மாசி", "பங்குனி"];
-  const englishMonths = ["சனவரி", "பிப்ரவரி", "மார்ச்", "ஏப்ரல்", "மே", "ஜுன்", "ஜுலை", "ஆகஸ்ட்", "செப்டம்பர்", "அக்டோபர்", "நவம்பர்", "டிசம்பர்"];
-  
-  const samvatsaras = ["ப்ரபவ", "விபவ", "சுக்ல", "ப்ரமோத", "ப்रजાpati", "अङ्गिरस्", "श्रीमुख", "भव", "युवन्", "धात्री", "ईश्वर", "बहुधान्य", "पञ्जब", "किलक", "सौम्य", "साधारण", "विरोधी", "विकृति", "खर", "नन्दन", "विजय", "जय", "मन्मथ", "दुर्मुख", "हेमलम्बी", "विलम्बी", "विकारी", "शार्वरी", "प्लव", "शुभकृति", "शोभन", "कृतु", "अन्नन्द", "भृगु", "एनला", "ईश्वर", "बहुल", "पृथु", "विष्णु", "सध्य", "शुक्र", "ब्रह्म", "इंद्र", "बान", "अजय", "नलदी", "विजय", "जय", "मन्मथ", "दुर्मुख", "हेमलम्भी", "विलम्बी", "विकारी", "शार्वरी", "प्लव", "शुभकृति", "शोभन", "कृतु"];
-
-  const ayanas = ["உத்தரായணம்", "தக్ષिणായணम्"];
-  const rutus = ["वसन्त", "ग्रीष्म", "वर्ष", "शरद्", "हेमन्त", "शिशिर"];
-  const tamilRutus = ["வசந்தம்", "க्रीஷ்மம்", "వర్ష", "শरद्", "हेमन्त", "शिशिर"];
-  
-  const pakshas = ["சுக्ල", "క్ృష్ణ"];
-  const thithis = ["ప్రతిपदा", "द्वितीया", "तृतीया", "चतुर्थी", "पञ्चमी", "षष्ठी", "सप्तमी", "अष्टमी", "नवमी", "दशमी", "एकादशी", "द्वादशी", "त्रयोदशी", "चतुर्दशी", "पूर्णिमा/अमावस्या"];
-  
-  const vasaras = ["ভানुवार", "इन्दुवार", "भौमवार", "सौम्यवार", "गुरुवार", "भृगुवार", "स्तिरवार"];
-  const tamilDays = ["ஞாயிற்று", "திங்கட்கிழமை", "செவ்வாய்கிழமை", "புதன்কிழமை", "வியாழக்कிழமை", "வெள்ளிக்கிழமை", "சனிக்கிழமை"];
-  
-  const nakshatras = ["अश्विनी", "भरणी", "कृत्तिका", "रोहिणी", "मृगशीर्ष", "आर्द्रा", "पुनर्वसु", "पुष्य", "आश्लेषा", "मघा", "पूर्वा फल्गुनी", "उत्तरा फल्गुनी", "हस्त", "चित्रा", "स्वाति", "विशाखा", "अनुराधा", "ज्येष्ठा", "मूल", "पूर्वा षड़ा", "उत्तरा षड़ा", "श्रवण", "धनिष्ठा", "शतभिषा", "पूर्वा भाद्रपद", "उत्तरा भाद्रपद", "रेवती"];
-  
-  const tamilNakshatras = ["அசுவினி", "பரணி", "கிருத்திகை", "ரோஹிணி", "மృगசிர", "ആര്ദ്ര", "പുനര്വസു", "പുഷ്യ", "ആശ്ലേഷ", "മഘ", "പൂര്വഫല്ഗുനി", "ഉത്തരഫല്ഗുനി", "ഹസ്ത", "ചിത്ര", "സ്വാതി", "വിശാഖ", "അനുരാധ", "ജ്യേഷ്ഠ", "മൂല", "പൂര്വാഷാഢ", "ഉത്തരാഷാഢ", "ശ്രവണ", "ധനിഷ്ഠ", "ശതഭിഷ", "പൂര്വഭാദ്ര", "ഉത്തരഭാദ്ര", "രേവതി"];
-
-  const yogas = ["विक्कुन्ध", "प्रिति", "आयुष्मान्", "सौभाग्य", "शोभन", "अत्रि", "आर्द्रा", "समृद्धि", "ध्रुव", "प्रभु", "सिद्ध", "व्यतीपात"];
-  
-  function getMonthInfo(date) {
-    const month = date.getMonth();
-    const day = date.getDate();
-    
-    // April = Tamil month Chittirai (மாசி to சித்திரை transition around mid-April)
-    if (month === 3) { // April
-      return day < 15 ? { month: "மாசி", monthIndex: 8 } : { month: "சித்திரை", monthIndex: 0 };
-    }
-    
-    const monthMap = {
-      0: { month: "பங்குனி", monthIndex: 9 },
-      1: { month: "சித்திரை", monthIndex: 0 },
-      2: { month: "வைகாசி", monthIndex: 1 },
-      3: { month: "ஆனி", monthIndex: 2 },
-      4: { month: "ஆடி", monthIndex: 3 },
-      5: { month: "ஐப்பசி", monthIndex: 4 },
-      6: { month: "கார்த்திகை", monthIndex: 5 },
-      7: { month: "மார்கழி", monthIndex: 6 },
-      8: { month: "தை", monthIndex: 7 },
-      9: { month: "மாசி", monthIndex: 8 },
-      10: { month: "பங்குனி", monthIndex: 9 },
-      11: { month: "பங்குனி", monthIndex: 9 }
-    };
-    
-    return monthMap[month] || { month: englishMonths[month], monthIndex: month };
-  }
-
-  function render() {
+  function calculateTamilCalendar() {
     const today = new Date();
     const d = today.getDate();
-    const m = today.getMonth();
+    const m = today.getMonth(); // 0-11
     const y = today.getFullYear();
-    const dayOfWeek = today.getDay();
-
-    if (dateLabel) dateLabel.textContent = d + ' ' + englishMonths[m] + ' ' + y;
-    if (dayLabel) dayLabel.textContent = tamilDays[dayOfWeek];
-
-    const monthInfo = getMonthInfo(today);
+    const dayOfWeek = today.getDay(); // 0=Sunday, 1=Monday, etc.
     
-    // Calculate ayana (Uttarayana: Jan-June, Dakshinayana: July-Dec)
-    const ayana = (m >= 0 && m <= 5) ? "உத்தரായணம्" : "దక్ష్ణాయणम्";
+    // Get day of year
+    const start = new Date(y, 0, 0);
+    const diff = today - start;
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay);
+
+    // Tamil Month Mapping (Tamil months start mid-month in Gregorian calendar)
+    // சித்திரை (Apr 14 - May 14) -> Month 0
+    // வைகாசி (May 14 - Jun 14) -> Month 1
+    // ஆனி (Jun 14 - Jul 14) -> Month 2
+    // ஆடி (Jul 14 - Aug 14) -> Month 3
+    // ஐப்பசி (Aug 14 - Sep 14) -> Month 4
+    // கார்த்திகை (Sep 14 - Oct 14) -> Month 5
+    // மார்கழி (Oct 14 - Nov 14) -> Month 6
+    // தை (Nov 14 - Dec 14) -> Month 7
+    // மாசி (Dec 14 - Jan 14) -> Month 8
+    // பங்குனி (Jan 14 - Feb 14) -> Month 9
+
+    const tamilMonths = ["சித்திரை", "வைகாசி", "ஆனி", "ஆடி", "ஐப்பசி", "கார்த்திகை", "மார்கழி", "தை", "மாசி", "பங்குனி"];
+    const gregorianMonths = ["சனவரி", "பிப்ரவரി", "மார்ச்", "ஏப்ரல்", "மே", "ஜுன்", "ஜுலை", "ஆகஸ்ட்", "செப்டம்பர்", "அக்டோபர்", "நவம்பர்", "டிசம்பர்"];
     
-    // Calculate ritu based on month
-    let ritu;
-    if (m === 2 || m === 3 || m === 4) ritu = "वसन्त (वसन्तऋतु)"; // Spring
-    else if (m === 5 || m === 6) ritu = "ग्रीष्म (ग्रीष्मऋतु)"; // Summer
-    else if (m === 7 || m === 8) ritu = "वर्ष (वर्षऋतु)"; // Monsoon
-    else if (m === 9 || m === 10) ritu = "शरद् (शरदऋतु)"; // Autumn
-    else if (m === 11 || m === 0) ritu = "शिशिर (शिशिरऋतु)"; // Winter
-    else ritu = "हेमन्त (हेमन्तऋतु)"; // Pre-winter
-
-    // Calculate tithi (lunar day) - simplified calculation
-    const tithiIndex = (d % 15) || 15;
-    const paksha = (d % 30) < 15 ? "सुक्ल" : "कृष्ण";
+    const tamilDays = ["ஞாயிற்று", "திங்கட்கிழமை", "செவ்வாய்கிழமை", "புதன்கிழமை", "வியாழக்கிழமை", "வெள்ளிக்கிழமை", "சனிக்கிழமை"];
     
-    // Calculate nakshatra - simplified
-    const nakshatraIndex = d % 27;
-    const yogaIndex = d % yogas.length;
-
-    // Samvatsara calculation for traditional 60-year cycle
-    const samvatsaraBase = (y - 1987) % 60; // 1987 was a base year
-    const samvatsaraIndex = samvatsaraBase >= 0 ? samvatsaraBase : samvatsaraBase + 60;
-
-    // Full sangalpam text in Traditional format
-    const sangalpamContent = 
-      'ॐ' + '\n\n' +
-      'மமோबाध्य समस्त दुरीत क्षय अर्थम्' + '\n' +
-      'श्रीपरमेश्वर प्रीत्यार्थम्' + '\n' +
-      'सुभे – सोभने – मुहूर्थे - आध्य ब्रह्मणः' + '\n\n' +
-      'द्वितीयपरार्धे' + '\n' +
-      'स्वेतवराह कल्पे' + '\n' +
-      'वैवस्वत मन्वन्तरे' + '\n' +
-      'अष्टाविंश शतितमे' + '\n' +
-      'कली युगे' + '\n' +
-      'प्रथमे पादे' + '\n' +
-      'जम्बूद्वीपे' + '\n' +
-      'भारत वर्षे' + '\n' +
-      'भरत कण्डे' + '\n' +
-      'मेरोः दक्षीणे पार्श्वे' + '\n\n' +
-      'शक अब्दे - ' + (y - 79) + ' वर्षे' + '\n\n' +
-      samvatsaras[samvatsaraIndex] + ' संवत्सरे' + '\n' +
-      ayana + ' ' + ritu + '\n' +
-      monthInfo.month + ' मासे' + '\n' +
-      paksha + ' पक्षे' + '\n' +
-      'तिथि # ' + tithiIndex + '\n' +
-      tamilDays[dayOfWeek] + ' वासरयुक्तायाम्' + '\n' +
-      tamilNakshatras[nakshatraIndex] + ' नक्षत्र युक्तायाम्' + '\n' +
-      yogas[yogaIndex] + ' योग सहितायाम्' + '\n\n' +
-      'अस्यां वर्तमानायां दिवसे' + '\n' +
-      'नित्य पूजां करिष्यामि।';
-
-    if (sankalpamText) {
-      sankalpamText.innerHTML = '<div style="line-height: 2.4; font-size: 0.9rem; color: #2d2416; word-spacing: 0.05em; text-align: center; font-family: \'Noto Sans Tamil\', \'Noto Sans Devanagari\', serif; letter-spacing: 0.02em;">' + sangalpamContent.replace(/\n/g, '<br/>') + '</div>';
+    const nakshatras = ["அசுவினி", "பரணி", "கிருத்திகை", "ரோஹிணி", "மிருக சிர", "ஆர்த்திரா", "புனர்வசு", "புஷ்யம்", "ஆசலிஷை", "மக", "பூர்வபல்குனி", "உத்తரபல்குனி", "ஹஸ்த", "சித்திரை", "சுவாதி", "விசாகம்", "அனுராதா", "ஜ்யேஷ்டை", "மூல", "பூர்வாஷாடை", "உத்தராஷாடை", "சிரவணம்", "தனிஷ்டை", "சதயம்", "பூர்வபாடை", "உத்தரபாடை", "ரேவதி"];
+    
+    const yogas = ["விக்குண்டம்", "ப்ரீதி", "आयुष्मान", "सौभाग्य", "शोभन", "अत्री", "आर्द्रा", "समृद्ध", "ध्रुव", "प्रभु", "सिद्ध", "व्यतीपात"];
+    
+    // Calculate Tamil month
+    let tamilMonth, tamilMonthIndex;
+    const monthDates = [14, 14, 14, 14, 14, 14, 14, 14, 14, 14]; // Each month starts on 14th
+    
+    if (m === 3) { // April
+      if (d < 14) {
+        tamilMonth = "பங்குனி";
+        tamilMonthIndex = 9;
+      } else {
+        tamilMonth = "சித்திரை";
+        tamilMonthIndex = 0;
+      }
+    } else if (m === 4) { // May
+      if (d < 14) {
+        tamilMonth = "சித்திரை";
+        tamilMonthIndex = 0;
+      } else {
+        tamilMonth = "வைகாசி";
+        tamilMonthIndex = 1;
+      }
+    } else if (m === 5) { // June
+      if (d < 14) {
+        tamilMonth = "வைகாசி";
+        tamilMonthIndex = 1;
+      } else {
+        tamilMonth = "ஆனி";
+        tamilMonthIndex = 2;
+      }
+    } else if (m === 6) { // July
+      if (d < 14) {
+        tamilMonth = "ஆனி";
+        tamilMonthIndex = 2;
+      } else {
+        tamilMonth = "ஆடி";
+        tamilMonthIndex = 3;
+      }
+    } else if (m === 7) { // August
+      if (d < 14) {
+        tamilMonth = "ஆடி";
+        tamilMonthIndex = 3;
+      } else {
+        tamilMonth = "ஐப்பசி";
+        tamilMonthIndex = 4;
+      }
+    } else if (m === 8) { // September
+      if (d < 14) {
+        tamilMonth = "ஐப்பசி";
+        tamilMonthIndex = 4;
+      } else {
+        tamilMonth = "கார்த்திகை";
+        tamilMonthIndex = 5;
+      }
+    } else if (m === 9) { // October
+      if (d < 14) {
+        tamilMonth = "கார்த்திகை";
+        tamilMonthIndex = 5;
+      } else {
+        tamilMonth = "மார்கழி";
+        tamilMonthIndex = 6;
+      }
+    } else if (m === 10) { // November
+      if (d < 14) {
+        tamilMonth = "மார்கழி";
+        tamilMonthIndex = 6;
+      } else {
+        tamilMonth = "தை";
+        tamilMonthIndex = 7;
+      }
+    } else if (m === 11) { // December
+      if (d < 14) {
+        tamilMonth = "தை";
+        tamilMonthIndex = 7;
+      } else {
+        tamilMonth = "மாசி";
+        tamilMonthIndex = 8;
+      }
+    } else if (m === 0) { // January
+      if (d < 14) {
+        tamilMonth = "மாசி";
+        tamilMonthIndex = 8;
+      } else {
+        tamilMonth = "பங்குனி";
+        tamilMonthIndex = 9;
+      }
+    } else if (m === 1) { // February
+      if (d < 14) {
+        tamilMonth = "பங்குனி";
+        tamilMonthIndex = 9;
+      } else {
+        tamilMonth = "சித்திரை";
+        tamilMonthIndex = 0;
+      }
+    } else if (m === 2) { // March
+      tamilMonth = "பங்குனி";
+      tamilMonthIndex = 9;
     }
 
-    if (meaningText) {
-      meaningText.innerHTML = '🙏 <strong>सुभमस्तु:</strong> यह संकल्प आपके दिये के सभी शुभ कार्यों के लिए है। प्रतिदिन पूजा से पहले इस संकल्प का उच्चारण करें।<br/><br/>📅 <strong>आज की जानकारी:</strong> ' + d + ' ' + englishMonths[m] + ' ' + y + ' | ' + tamilDays[dayOfWeek] + ' | ' + monthInfo.month;
+    // Calculate Ayana (Uttarayana: Jan-June, Dakshinayana: July-Dec)
+    let ayana, ayanaName;
+    if ((m >= 0 && m <= 5) || (m === 3 && d < 21)) { // Approx Vernal Equinox on March 20-21
+      ayana = "உத்திராயணம்";
+      ayanaName = "Uttirayana";
+    } else {
+      ayana = "தக்ஷிணாயணம்";
+      ayanaName = "Dakshinayana";
     }
+
+    // Calculate Ritu (Season) - Based on Tamil months and solar position
+    let ritu, rituName;
+    if (tamilMonthIndex === 0 || tamilMonthIndex === 1) { // சித்திரை, வைகாசி
+      ritu = "வசந்தம்";
+      rituName = "Vasantha (Spring)";
+    } else if (tamilMonthIndex === 2 || tamilMonthIndex === 3) { // ஆனி, ஆடி
+      ritu = "க்ரீஷ்மம்";
+      rituName = "Greeshma (Summer)";
+    } else if (tamilMonthIndex === 4 || tamilMonthIndex === 5) { // ஐப்பசி, கார்த்திகை
+      ritu = "வர்ஷம்";
+      rituName = "Varsha (Monsoon)";
+    } else if (tamilMonthIndex === 6 || tamilMonthIndex === 7) { // மார்கழி, தை
+      ritu = "சரத்";
+      rituName = "Sharad (Autumn)";
+    } else if (tamilMonthIndex === 8 || tamilMonthIndex === 9) { // மாசி, பங்குனி
+      ritu = "சிசிரம்";
+      rituName = "Sisira (Winter)";
+    }
+
+    // Calculate Paksha (Lunar fortnight) based on approximate lunar cycle
+    // Simple calculation: Days 1-15 of lunar month = Sukla, Days 16-30 = Krishna
+    const lunarDay = ((dayOfYear + 11) % 30) + 1; // Approximately
+    let paksha, pakshaName;
+    if (lunarDay <= 15) {
+      paksha = "சுக்ல";
+      pakshaName = "Sukla (Waxing)";
+    } else {
+      paksha = "கிருஷ்ண";
+      pakshaName = "Krishna (Waning)";
+    }
+
+    // Calculate Tithi (Lunar day) - Simplified
+    const tithi = lunarDay;
+    let tithiName;
+    if (tithi === 1) tithiName = "ப்ரதிபதை";
+    else if (tithi === 2) tithiName = "த்விதீயை";
+    else if (tithi === 3) tithiName = "த்ருதீயை";
+    else if (tithi === 4) tithiName = "சतுர்த्यै";
+    else if (tithi === 5) tithiName = "पञ्चमै";
+    else if (tithi === 14) tithiName = "चতुर्दशী";
+    else if (tithi === 15) tithiName = "పూర్ణिमा/అमावस్य";
+    else tithiName = "தिथि " + tithi;
+
+    // Calculate Nakshatra - Simple calculation based on day of year
+    const nakshatraIndex = (dayOfYear + 20) % 27; // Offset approximately
+    const nakshatra = nakshatras[nakshatraIndex];
+
+    // Calculate Yoga
+    const yogaIndex = dayOfYear % yogas.length;
+    const yoga = yogas[yogaIndex];
+
+    // Vasara is simply day of week
+    const vasara = tamilDays[dayOfWeek];
+
+    // Update HTML elements
+    const updateElement = (id, value) => {
+      const elem = document.querySelector(id);
+      if (elem) elem.textContent = value;
+    };
+
+    updateElement('.tamil-month', tamilMonth);
+    updateElement('.ayana', ayana);
+    updateElement('.ritu', ritu);
+    updateElement('.paksha', paksha);
+    updateElement('.nakshatra', nakshatra);
+    updateElement('.vasara', vasara);
+    updateElement('.tithi', tithiName);
+    
+    // Update calendar details
+    document.querySelectorAll('.tamil-month-detail').forEach(el => el.textContent = tamilMonth);
+    document.querySelectorAll('.ayana-detail').forEach(el => el.textContent = ayana + ' (' + ayanaName + ')');
+    document.querySelectorAll('.ritu-detail').forEach(el => el.textContent = ritu + ' (' + rituName + ')');
+    document.querySelectorAll('.paksha-detail').forEach(el => el.textContent = paksha + ' (' + pakshaName + ')');
+    document.querySelectorAll('.nakshatra-detail').forEach(el => el.textContent = nakshatra);
+    document.querySelectorAll('.vasara-detail').forEach(el => el.textContent = vasara);
+    document.querySelectorAll('.tithi-detail').forEach(el => el.textContent = tithiName);
+    document.querySelectorAll('.yoga-detail').forEach(el => el.textContent = yoga);
   }
 
-  if (button) button.addEventListener('click', render);
-  render();
+  calculateTamilCalendar();
 });
