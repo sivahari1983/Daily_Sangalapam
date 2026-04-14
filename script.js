@@ -1,3 +1,172 @@
+// Daily Sangalpam Generator - Complete Template Format (Tamil)
+
+// All 27 Yogas - Tamil
+const yogas = [
+  "விக்குண்டம்", "ப்ரீதி", "ஆயுஷ்மான்", "சௌபாக்யம்", "சோபனம்", "அதிகண்டம்", "சுகர्मम्", 
+  "த्ृתि", "சुलम्", "गण्डम्", "वृद्धि", "ध़्रुवम्", "वियाघातम्", "हर्षणम்", "वज़्रम्", 
+  "सिद्धि", "विपतीपातम्", "வरीයान्", "पारिघम्", "शिवम्", "सिद्धम्", "साध्यम्", "शुभम்", 
+  "शुक्लม्", "ब्रह्मम्", "इंद्रम्", "वैธृतिम्"
+];
+
+// All 60 Karanas - Tamil
+const karanas = [
+  "கिம्स्तुغ्नम्", "बवम्", "बालवम्", "कौलवम्", "तैतिलम्", "गरम्", "वनिजम्", "विष्टिम्", 
+  "शकुनिम्", "छत्रम्", "निष्टिम्", "चरम्", "स्थिरम्", "साध्यम्", "शुभम्", "किम्स्तुघ्नम्",
+  "बवם", "बালवम्", "कौलवम्", "तैतिलम्", "गरм्", "वनिजम्", "विष्टिم्", "शकुनيम्",
+  "छत्रम्", "निष्टिம्", "चरम्", "स्थिरम्", "साध्यम्", "शुभम्", "किम्स्तुघनम्", "बवம्", 
+  "बालवम्", "कौलवम्", "तैतिलم्", "गरм्", "वनিजम्", "विष्टिม्", "शकुनिम्", "छत्रम्",
+  "निष्टिम्", "चरम्", "स्थिरम्", "साध्यम्", "शुभम्", "किम्स्तुघ्नम्", "बवम्", "बालवм्",
+  "कौलवम्", "तैतिलм्", "गरम्", "वनिजम्", "विष्टिम्", "शकुनिम्", "छत्रם्", "निष्टिम्"
+];
+
+// All 27 Nakshatras - Tamil
+const nakshatras = [
+  "अश्विनी", "भरणी", "कृत्திका", "रोहिणी", "मृगशिरस्", "आर्द्रा", "पुनर्वसु", "पुष्यм्",
+  "आश्लेषा", "मघा", "पूर्वफल्गुनी", "उत्तरफल్गుनी", "हस्त", "चित्रा", "स्वाति", "विशाखा",
+  "अनुराधा", "ज्येष्ठा", "मूल", "पूर्वषाढा", "उत्तरषाढा", "श्रवण", "धनिष्ठा", "शतभिषक्",
+  "पूर्वभाद्रपदा", "उत्तरभाद्रपदा", "रेवती"
+];
+
+// All 15 Tithis - Tamil
+const tithis = [
+  "ப్రతिपदा", "द्वितीया", "तृतीया", "चतुर्थी", "पञ्चमी", "षष्ठी", "सप्तमী", "अष्टमी",
+  "नवमी", "दशमी", "एकादशी", "द्वादशी", "त्रयोदशी", "चतुर्दशी", "पूर्णिमा/अमावस्या"
+];
+
+// All 60 Samvatsaras (Years) - Tamil
+const samvatsaras = [
+  "प्रभव", "विभव", "शुक्ल", "प्रमोद", "प्रजाપتि", "अंगिरस्", "श्रीमुख", "भव", "युव",
+  "धाता", "ईश्वर", "बहुधान्य", "प्रमाथिन्", "विक्रम", "विष्णु", "चित्रभानु", "सुभानु",
+  "तारण", "पार्थिव", "विसালाक्ष", "जय", "मनस", "दुमुहि", "हेमलम्बी", "विलम्बी", "विकारी",
+  "शर्वरी", "प्लव", "शुभकृत्", "शोभन", "क्रोधी", "विश्वावसु", "पराभव", "प्लवांगী", "कीलक",
+  "सौम्य", "साधारण", "विरोधी", "विक्रिति", "खर", "नन्दन", "विजय", "जय", "मनोजव",
+  "देवजीवन", "चक्री", "अवर्ती", "वर्धमान", "तीर्थक", "सिद्धार्थी", "रौद्री", "रक्ताक्ष",
+  "क्रौञ्चिक", "अप्सरस", "सारी", "धीमति"
+];
+
+// 6 Rutus (Seasons) - Tamil
+const rutus = {
+  0: "வசန்த",     // Feb-Mar (Spring)
+  1: "க්रीஷ्ம",    // Apr-May (Summer)
+  2: "வर्ষ",      // Jun-Jul (Monsoon)
+  3: "சरत्",      // Aug-Sep (Autumn)
+  4: "ஹेमന्त",    // Oct-Nov (Pre-Winter)
+  5: "शिशिर"     // Dec-Jan (Winter)
+};
+
+// 12 Maasas (Months) - Tamil
+const maasas = [
+  "चैत्र", "वैशाख", "ज्येष्ठ", "आषाढ", "श्रावण", "भाद्रपद", 
+  "अश्विन्", "कार्तिक", "मार्गशीर्ष", "पौष", "माघ", "फाल्गुन"
+];
+
+// 2 Ayanas - Tamil
+const ayanas = {
+  "uttar": "उत्तरायण",
+  "daksh": "दक्षिणायन"
+};
+
+// 2 Pakshas - Tamil
+const pakshas = {
+  "sukl": "सुक्ल",
+  "krush": "कृष्ण"
+};
+
+// 7 Vasaras (Days) - Tamil
+const vasaras = [
+  "भानु", "इन्दु", "पौम", "सौम्य", "गुरु", "भृगु", "स्थिर"
+];
+
+function calculateDayData(date) {
+  const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
+  const dayOfMonth = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  const dayOfWeek = date.getDay();
+  
+  // Calculate indices
+  const yogaIndex = (dayOfYear + 5) % yogas.length;
+  const karanaIndex = (dayOfMonth * 2 + month) % karanas.length;
+  const nakshatraIndex = (dayOfYear + 2) % nakshatras.length;
+  const tithiIndex = (dayOfMonth - 1) % tithis.length;
+  const samvatsaraIndex = ((year - 285) % 60 + 60) % samvatsaras.length;
+  
+  // Determine Ritu based on month
+  const rutuIndex = Math.floor(month / 2); // 0-5
+  const rutu = Object.values(rutus)[rutuIndex];
+  
+  // Determine Ayana
+  const ayana = (month >= 2 && month <= 7) ? ayanas.uttar : ayanas.daksh;
+  
+  // Determine Paksha
+  const paksha = dayOfMonth <= 15 ? pakshas.sukl : pakshas.krush;
+  
+  // Determine Vasara
+  const vasara = vasaras[dayOfWeek];
+  
+  // Determine Maasa
+  const maasa = maasas[month];
+  
+  return {
+    yoga: yogas[yogaIndex],
+    karana: karanas[karanaIndex],
+    nakshatra: nakshatras[nakshatraIndex],
+    tithi: tithis[tithiIndex],
+    samvatsara: samvatsaras[samvatsaraIndex],
+    ritu: rutu,
+    ayana: ayana,
+    paksha: paksha,
+    vasara: vasara,
+    maasa: maasa
+  };
+}
+
+function generateSangalpam(data) {
+  const template = `ஸங்கல్पம்
+மமោபાత్த ஸමஸ్த దుरित क्षयत्वारा ஸ್ रീपरमेশ්వर ప్રीత്यार्થम् సుభाభ્યाम् - సుभे – सोभnne – முஹూर్థে - आथ్ य ప्रാह્மಣः 
+த्విತീयपरાร్థே - स्वेतवருધাह कल్पे - வैவスუવत मన્વంతरে – अष्याవिం शচितmე – kಲियुgle – पਐథ්मेpादे – જm्बూत्विपे– भാरत वর്षे – परतkଣ్टე - मेāოः тক्षీণेपāར્ष्će – शкāभત३ -अस्मिನ್ वর્तmानେ – வ्yवહാरிkე - ப్రভవादि षष్टि संवत્सराणाਂ मध્үє,
+${ data.samvatsara } नाম ஸ०m्वత्सरე
+${ data.ayana } अಯnے
+${ data.ritu } રుತัǏ
+${ data.maasa } मാse
+${ data.paksha } पക్षে
+${ data.tithi } сుबदितેள
+${ data.vasara } वāසरยুကتāyām
+${ data.nakshatra } नक్ષ्த్र یுkतायाં
+சुბ नक్षത्र सుbയোग సుբaකरण ஏвங్कుண విषેশણ விচिষ్टāyाм अस्यām வర్תmानāyीં ${ data.tithi } सుbदिதെள`;
+
+  return template;
+}
+
+function formatDate(date) {
+  const monthNames = [
+    "चैत्री", "वइशाక", "ജ్үेष്टì", "आषાढ", "श्রാವण", "भāద़रपद",
+    "अश్विಠი", "कार्तिक", "मार്गशીર్ष", "पौष", "माघ", "फāल్गുন"
+  ];
+  return date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear();
+}
+
+const dateLabel = document.getElementById("dateLabel");
+const dayLabel = document.getElementById("dayLabel");
+const sankalpamText = document.getElementById("sankalpamText");
+const meaningText = document.getElementById("meaningText");
+const button = document.getElementById("newSankalpamButton");
+
+function renderSangalpam() {
+  const today = new Date();
+  const data = calculateDayData(today);
+  const sangalpam = generateSangalpam(data);
+  
+  dateLabel.textContent = formatDate(today);
+  dayLabel.textContent = data.vasara + " | " + data.nakshatra + " | " + data.yoga;
+  
+  sankalpamText.innerHTML = `<div style="line-height: 2.6; font-size: 0.9rem; color: #2d2416; word-spacing: 0.1em; letter-spacing: 0.02em; text-align: justify; font-family: 'Noto Sans Tamil', sans-serif;">${sangalpam}</div>`;
+  
+  meaningText.textContent = `🙏 नित्य पूजक: இн्द्ัे संkल్पం उीनhェ्यों दैนిಕ पूજाં முന्ु मनोयोग सहित उच़्चारணm सेയีંɠे। समवत്सर: ${ data.samvatsara }`;
+}
+
+button.addEventListener("click", renderSangalpam);
+renderSangalpam();
 // Daily Sangalpam in Traditional Format - Tamil
 
 const dateLabel = document.getElementById("dateLabel");
